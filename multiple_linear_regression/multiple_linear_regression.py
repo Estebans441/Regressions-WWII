@@ -9,19 +9,14 @@ from sklearn.metrics import r2_score
 dataset = pd.read_csv('../datasets/Summary of Weather.csv', low_memory= False)
 X = dataset.iloc[:, [0, 5, 6]].values   # Station, MinTemp, MeanTemp
 y = dataset.iloc[:, [4]].values         # MaxTemp
-print(X[:5])
 
-"""# Encoding categorical data
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
 
-ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [0])], remainder='passthrough')
-X = np.array(ct.fit_transform(X))
-print(X)
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaler.fit(X)
-scaled_X = scaler.transform(X)
-print(scaled_X[:5])"""
+X = scaler.transform(X)
+
+print(X[:10])
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
@@ -37,8 +32,9 @@ regressor.fit(X_train, y_train)
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
 np.set_printoptions(precision=2)
-print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1))
+print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1)[:10])
 
 # Evaluating the Model Performance
 r2 = r2_score(y_test, y_pred)
 print("R^2 Score: ", r2)
+print("Coefficients: ", regressor.coef_)
