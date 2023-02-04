@@ -37,7 +37,9 @@ y_pred = regressor.predict(X1_test)
 
 # Evaluating the Model Performance
 r2 = r2_score(y_test, y_pred)
-print("MeanTemp R^2 Score: ", r2)
+print("MinTemp")
+print("   R^2 Score: ", r2)
+print("   Coefficients: ", regressor.coef_)
 
 # Visualising the Training set results
 plt.scatter(X1_train, y_train, color='lightcoral')
@@ -60,7 +62,9 @@ y_pred = regressor.predict(X2_test)
 
 # Evaluating the Model Performance
 r2 = r2_score(y_test, y_pred)
-print("MeanTemp R^2 Score: ", r2)
+print("MeanTemp")
+print("   R^2 Score: ", r2)
+print("   Coefficients: ", regressor.coef_)
 
 # Visualising the Training set results
 plt.scatter(X2_train, y_train, color='limegreen')
@@ -83,13 +87,15 @@ y_pred = regressor.predict(X3_test)
 
 # Evaluating the Model Performance
 r2 = r2_score(y2_test, y_pred)
-print("Precip R^2 Score: ", r2)
+print("Precip")
+print("   R^2 Score: ", r2)
+print("   Coefficients: ", regressor.coef_)
 
 # Visualising the Training set results
 plt.scatter(X3_train, y2_train, color='navajowhite')
 plt.scatter(X3_test, y2_test, color='darkorange')
 plt.plot(X3_train, regressor.predict(X3_train), color='blue')
 plt.title('MaxTemp vs Precip (Test set)')
-plt.xlabel('Precip')
+plt.xlabel('Precip (mm)')
 plt.ylabel('MaxTemp')
 plt.show()
