@@ -36,8 +36,10 @@ X_ = poly.fit_transform(X_train)
 clf = linear_model.LinearRegression()
 clf.fit(X_, y_train)
 
+# Predicting the Test set results
 X_2 = poly.fit_transform(X_test)
 y_pred = clf.predict(X_2)
+print(np.concatenate((y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)), 1)[:10])
 
 # Evaluating the Model Performance
 r2 = r2_score(y_test, y_pred)
